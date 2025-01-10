@@ -1,13 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://dk28iq4klyoso"]
+[gd_scene load_steps=4 format=3 uid="uid://dk28iq4klyoso"]
 
 [ext_resource type="Script" path="res://addons/NetworkDebugTool/NDT_GUI/NDT_GUI.gd" id="1_6o1w5"]
 [ext_resource type="Theme" uid="uid://r08s6edgyabj" path="res://addons/NetworkDebugTool/NDT_Theme.tres" id="2_fw7pr"]
+[ext_resource type="PackedScene" uid="uid://bsounqkib8v7x" path="res://addons/NetworkDebugTool/RequestRow/RequestRow.tscn" id="3_qh6rt"]
 
 [node name="NDT_GUI" type="Window"]
 title = "Network Debug Tool"
-position = Vector2i(0, 36)
 size = Vector2i(400, 700)
+theme = ExtResource("2_fw7pr")
 script = ExtResource("1_6o1w5")
+RequestRowScene = ExtResource("3_qh6rt")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -16,13 +18,28 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("2_fw7pr")
 
-[node name="RequestsListContainer" type="VBoxContainer" parent="Control"]
-unique_name_in_owner = true
+[node name="VSplitContainer" type="VSplitContainer" parent="Control"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/VSplitContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="RequestsListContainer" type="VBoxContainer" parent="Control/VSplitContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="RequestDetailsPreview" type="TabContainer" parent="Control/VSplitContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2

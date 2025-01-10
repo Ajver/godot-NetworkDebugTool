@@ -1,5 +1,7 @@
 extends Window
 
+@export var RequestRowScene: PackedScene
+
 @onready var requests_list_container: VBoxContainer = %RequestsListContainer
 
 
@@ -18,7 +20,6 @@ func set_requests(req_list: Array[NDT_RequestDetails]) -> void:
 
 
 func new_request(details: NDT_RequestDetails) -> void:
-	print("new req: ", details.url)
-	var label = Label.new()
-	label.text = details.url
-	requests_list_container.add_child(label)
+	var row = RequestRowScene.instantiate()
+	requests_list_container.add_child(row)
+	row.setup(details)
