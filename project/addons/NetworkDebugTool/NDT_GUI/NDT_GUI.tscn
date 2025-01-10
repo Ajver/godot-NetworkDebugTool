@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://dk28iq4klyoso"]
+
+[ext_resource type="Script" path="res://addons/NetworkDebugTool/NDT_GUI/NDT_GUI.gd" id="1_6o1w5"]
+[ext_resource type="Theme" uid="uid://r08s6edgyabj" path="res://addons/NetworkDebugTool/NDT_Theme.tres" id="2_fw7pr"]
+
+[node name="NDT_GUI" type="Window"]
+title = "Network Debug Tool"
+position = Vector2i(0, 36)
+size = Vector2i(400, 700)
+script = ExtResource("1_6o1w5")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_fw7pr")
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0

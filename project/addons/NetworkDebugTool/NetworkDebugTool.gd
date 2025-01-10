@@ -1,6 +1,8 @@
 extends Node
 
-var _window: Window
+const _NDT_GUI_SCENE: PackedScene = preload("res://addons/NetworkDebugTool/NDT_GUI/NDT_GUI.tscn")
+
+var _gui: Window
 
 
 func _ready() -> void:
@@ -13,6 +15,5 @@ func _unhandled_key_input(event: InputEvent) -> void:
 
 
 func _pop_window() -> void:
-	_window = Window.new()
-	
-	add_child(_window)
+	_gui = _NDT_GUI_SCENE.instantiate()
+	add_child(_gui)
