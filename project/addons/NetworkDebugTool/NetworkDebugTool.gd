@@ -10,7 +10,7 @@ var _requests_list: Array[NDT_RequestDetails]
 func append_request_details(details: NDT_RequestDetails) -> void:
 	_requests_list.append(details)
 	
-	if _gui:
+	if is_instance_valid(_gui):
 		_gui.new_request(details)
 
 

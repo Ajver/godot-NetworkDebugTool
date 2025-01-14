@@ -5,7 +5,9 @@ func _ready() -> void:
 	print("Demo")
 	
 	await get_tree().create_timer(0.7).timeout
+	_make_request()
 	
+	await get_tree().create_timer(5.7).timeout
 	_make_request()
 
 

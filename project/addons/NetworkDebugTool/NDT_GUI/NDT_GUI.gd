@@ -8,6 +8,8 @@ extends Window
 func _init() -> void:
 	hide()
 	force_native = true
+	
+	close_requested.connect(queue_free)
 
 
 func _ready() -> void:
