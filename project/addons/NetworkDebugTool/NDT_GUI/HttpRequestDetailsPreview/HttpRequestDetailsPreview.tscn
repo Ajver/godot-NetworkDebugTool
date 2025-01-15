@@ -3,11 +3,12 @@
 [ext_resource type="Script" path="res://addons/NetworkDebugTool/NDT_GUI/HttpRequestDetailsPreview.gd" id="1_08mk3"]
 
 [node name="HttpRequestDetailsPreview" type="TabContainer"]
-custom_minimum_size = Vector2(0, 200)
-current_tab = 0
+custom_minimum_size = Vector2(300, 100)
+current_tab = 1
 script = ExtResource("1_08mk3")
 
 [node name="Headers" type="MarginContainer" parent="."]
+visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
@@ -15,58 +16,60 @@ theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 metadata/_tab_index = 0
 
-[node name="Headers" type="GridContainer" parent="Headers"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Headers"]
+layout_mode = 2
+
+[node name="Headers" type="GridContainer" parent="Headers/ScrollContainer"]
 layout_mode = 2
 columns = 2
 
-[node name="Label" type="Label" parent="Headers/Headers"]
+[node name="Label" type="Label" parent="Headers/ScrollContainer/Headers"]
 custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
 text = "Request URL:"
 
-[node name="UrlLabel" type="Label" parent="Headers/Headers"]
+[node name="UrlLabel" type="Label" parent="Headers/ScrollContainer/Headers"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "request url"
 
-[node name="Label2" type="Label" parent="Headers/Headers"]
+[node name="Label2" type="Label" parent="Headers/ScrollContainer/Headers"]
 layout_mode = 2
 text = "Method:"
 
-[node name="MethodLabel" type="Label" parent="Headers/Headers"]
+[node name="MethodLabel" type="Label" parent="Headers/ScrollContainer/Headers"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "POST/GET"
 
-[node name="Label4" type="Label" parent="Headers/Headers"]
+[node name="Label4" type="Label" parent="Headers/ScrollContainer/Headers"]
 layout_mode = 2
 text = "Status code:"
 
-[node name="StatusLabel" type="Label" parent="Headers/Headers"]
+[node name="StatusLabel" type="Label" parent="Headers/ScrollContainer/Headers"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "200"
 
-[node name="Label3" type="Label" parent="Headers/Headers"]
+[node name="Label3" type="Label" parent="Headers/ScrollContainer/Headers"]
 layout_mode = 2
 text = "Request time:"
 
-[node name="RequestTimestampLabel" type="Label" parent="Headers/Headers"]
+[node name="RequestTimestampLabel" type="Label" parent="Headers/ScrollContainer/Headers"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "1969-07-20 20:17:13"
 
-[node name="Label5" type="Label" parent="Headers/Headers"]
+[node name="Label5" type="Label" parent="Headers/ScrollContainer/Headers"]
 layout_mode = 2
 text = "Response time:"
 
-[node name="ResponseTimestampLabel" type="Label" parent="Headers/Headers"]
+[node name="ResponseTimestampLabel" type="Label" parent="Headers/ScrollContainer/Headers"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "1969-07-20 20:17:13"
 
 [node name="Request" type="MarginContainer" parent="."]
-visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
@@ -74,9 +77,24 @@ theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 metadata/_tab_index = 1
 
-[node name="Request" type="VBoxContainer" parent="Request"]
-visible = false
+[node name="ScrollContainer" type="ScrollContainer" parent="Request"]
 layout_mode = 2
+
+[node name="Request" type="VBoxContainer" parent="Request/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Request/ScrollContainer/Request"]
+layout_mode = 2
+text = "Request body:"
+
+[node name="RequestBodyLabel" type="RichTextLabel" parent="Request/ScrollContainer/Request"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+fit_content = true
+scroll_active = false
 
 [node name="Response" type="MarginContainer" parent="."]
 visible = false
@@ -88,5 +106,4 @@ theme_override_constants/margin_bottom = 5
 metadata/_tab_index = 2
 
 [node name="Response" type="VBoxContainer" parent="Response"]
-visible = false
 layout_mode = 2

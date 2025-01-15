@@ -16,6 +16,7 @@ func request(url: String, custom_headers: PackedStringArray = PackedStringArray(
 	
 	_details = NDT_RequestDetails.new()
 	_details.request_timestamp = Time.get_datetime_string_from_system(false, true)
+	_details.request_body = request_data
 	_details.url = url
 	_details.method = method
 	_details.http_req_error = error

@@ -5,6 +5,7 @@ extends AbstractRequestDetailsPreview
 @onready var status_label = %StatusLabel
 @onready var request_timestamp_label = %RequestTimestampLabel
 @onready var response_timestamp_label = %ResponseTimestampLabel
+@onready var request_body_label = %RequestBodyLabel
 
 var _details: NDT_RequestDetails
 
@@ -21,3 +22,21 @@ func _update_data() -> void:
 	status_label.text = str(_details.status_code)
 	request_timestamp_label.text = _details.request_timestamp
 	response_timestamp_label.text = _details.response_timestamp
+	request_body_label.text = _get_body_text(_details.request_body)
+
+
+func _get_body_text(body) -> String:
+	if body is String:
+		if body.is_empty():
+			return "<empty body>"
+		
+		var parser = JSON.new()
+		var error = parser.parse(body)
+		
+		if error != OK:
+			return body
+		
+		var beautified_json = JSON.stringify(parser.data, "\t")
+		return beautified_json
+	
+	return "<can't parse body>"
