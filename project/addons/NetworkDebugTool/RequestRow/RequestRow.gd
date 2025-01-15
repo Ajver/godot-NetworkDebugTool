@@ -16,14 +16,24 @@ func _ready() -> void:
 
 func setup(details: NDT_RequestDetails) -> void:
 	_details = details
-	
-	var url: String = details.url
+	_details.data_updated.connect(_update_data)
+	_update_data()
+
+
+func _update_data() -> void:
+	var url: String = _details.url
 	var ds_idx = url.find("//")
 	
 	if ds_idx != -1:
 		name_label.text = url.substr(ds_idx + 2)
 	else:
 		name_label.text = url
+	
+	if _details.status_code == -1:
+		status_label.text = "pending"
+	else:
+		status_label.text = str(_details.status_code)
+	
 
 
 func _on_pressed() -> void:

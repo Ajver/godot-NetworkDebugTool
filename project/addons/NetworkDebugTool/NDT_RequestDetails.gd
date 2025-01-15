@@ -1,6 +1,9 @@
 extends RefCounted
 class_name NDT_RequestDetails
 
+signal data_updated
+
+
 var url: String
 var method: HTTPClient.Method
 var status_code: int = -1

@@ -30,3 +30,4 @@ func _on_request_completed(result: int, response_code: int, headers: PackedStrin
 	_details.status_code = response_code
 	_details.response_headers = headers
 	_details.response_body = body
+	_details.data_updated.emit()
