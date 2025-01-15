@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dk28iq4klyoso"]
+[gd_scene load_steps=5 format=3 uid="uid://dk28iq4klyoso"]
 
 [ext_resource type="Script" path="res://addons/NetworkDebugTool/NDT_GUI/NDT_GUI.gd" id="1_6o1w5"]
 [ext_resource type="Theme" uid="uid://r08s6edgyabj" path="res://addons/NetworkDebugTool/NDT_Theme.tres" id="2_fw7pr"]
 [ext_resource type="PackedScene" uid="uid://bsounqkib8v7x" path="res://addons/NetworkDebugTool/RequestRow/RequestRow.tscn" id="3_qh6rt"]
+[ext_resource type="PackedScene" uid="uid://bkuvij70opyof" path="res://addons/NetworkDebugTool/NDT_GUI/HttpRequestDetailsPreview/HttpRequestDetailsPreview.tscn" id="4_gy53b"]
 
 [node name="NDT_GUI" type="Window"]
 title = "Network Debug Tool"
@@ -10,6 +11,7 @@ size = Vector2i(400, 700)
 theme = ExtResource("2_fw7pr")
 script = ExtResource("1_6o1w5")
 RequestRowScene = ExtResource("3_qh6rt")
+HttpRequestDetailsPreviewScene = ExtResource("4_gy53b")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -40,6 +42,6 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="RequestDetailsPreview" type="TabContainer" parent="Control/VSplitContainer"]
-custom_minimum_size = Vector2(0, 200)
+[node name="RequestDetailsContainer" type="MarginContainer" parent="Control/VSplitContainer"]
+unique_name_in_owner = true
 layout_mode = 2

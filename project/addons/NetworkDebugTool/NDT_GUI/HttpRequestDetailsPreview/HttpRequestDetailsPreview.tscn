@@ -1,0 +1,92 @@
+[gd_scene load_steps=2 format=3 uid="uid://bkuvij70opyof"]
+
+[ext_resource type="Script" path="res://addons/NetworkDebugTool/NDT_GUI/HttpRequestDetailsPreview.gd" id="1_08mk3"]
+
+[node name="HttpRequestDetailsPreview" type="TabContainer"]
+custom_minimum_size = Vector2(0, 200)
+current_tab = 0
+script = ExtResource("1_08mk3")
+
+[node name="Headers" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+metadata/_tab_index = 0
+
+[node name="Headers" type="GridContainer" parent="Headers"]
+layout_mode = 2
+columns = 2
+
+[node name="Label" type="Label" parent="Headers/Headers"]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+text = "Request URL:"
+
+[node name="UrlLabel" type="Label" parent="Headers/Headers"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "request url"
+
+[node name="Label2" type="Label" parent="Headers/Headers"]
+layout_mode = 2
+text = "Method:"
+
+[node name="MethodLabel" type="Label" parent="Headers/Headers"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "POST/GET"
+
+[node name="Label4" type="Label" parent="Headers/Headers"]
+layout_mode = 2
+text = "Status code:"
+
+[node name="StatusLabel" type="Label" parent="Headers/Headers"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "200"
+
+[node name="Label3" type="Label" parent="Headers/Headers"]
+layout_mode = 2
+text = "Request time:"
+
+[node name="RequestTimestampLabel" type="Label" parent="Headers/Headers"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "1969-07-20 20:17:13"
+
+[node name="Label5" type="Label" parent="Headers/Headers"]
+layout_mode = 2
+text = "Response time:"
+
+[node name="ResponseTimestampLabel" type="Label" parent="Headers/Headers"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "1969-07-20 20:17:13"
+
+[node name="Request" type="MarginContainer" parent="."]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+metadata/_tab_index = 1
+
+[node name="Request" type="VBoxContainer" parent="Request"]
+visible = false
+layout_mode = 2
+
+[node name="Response" type="MarginContainer" parent="."]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+metadata/_tab_index = 2
+
+[node name="Response" type="VBoxContainer" parent="Response"]
+visible = false
+layout_mode = 2
