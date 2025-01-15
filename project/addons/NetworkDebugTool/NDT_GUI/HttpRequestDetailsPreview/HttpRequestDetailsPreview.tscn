@@ -4,7 +4,7 @@
 
 [node name="HttpRequestDetailsPreview" type="TabContainer"]
 custom_minimum_size = Vector2(300, 100)
-current_tab = 1
+current_tab = 2
 script = ExtResource("1_08mk3")
 
 [node name="Headers" type="MarginContainer" parent="."]
@@ -70,6 +70,7 @@ layout_mode = 2
 text = "1969-07-20 20:17:13"
 
 [node name="Request" type="MarginContainer" parent="."]
+visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
@@ -97,7 +98,6 @@ fit_content = true
 scroll_active = false
 
 [node name="Response" type="MarginContainer" parent="."]
-visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
@@ -105,5 +105,34 @@ theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 metadata/_tab_index = 2
 
-[node name="Response" type="VBoxContainer" parent="Response"]
+[node name="NoResponseYetLabel" type="Label" parent="Response"]
+unique_name_in_owner = true
+visible = false
 layout_mode = 2
+text = "<No response arrived>"
+
+[node name="ResponseTab" type="ScrollContainer" parent="Response"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Response" type="VBoxContainer" parent="Response/ResponseTab"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Response/ResponseTab/Response"]
+layout_mode = 2
+text = "Response:"
+
+[node name="ResponseBodyLabel" type="RichTextLabel" parent="Response/ResponseTab/Response"]
+unique_name_in_owner = true
+layout_mode = 2
+fit_content = true
+scroll_active = false
+
+[node name="ResponseTextureRect" type="TextureRect" parent="Response/ResponseTab/Response"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+expand_mode = 1
+stretch_mode = 5

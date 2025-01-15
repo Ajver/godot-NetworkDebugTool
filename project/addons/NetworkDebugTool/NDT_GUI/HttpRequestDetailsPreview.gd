@@ -6,6 +6,10 @@ extends AbstractRequestDetailsPreview
 @onready var request_timestamp_label = %RequestTimestampLabel
 @onready var response_timestamp_label = %ResponseTimestampLabel
 @onready var request_body_label = %RequestBodyLabel
+@onready var response_body_label = %ResponseBodyLabel
+@onready var response_texture_rect = %ResponseTextureRect
+@onready var no_response_yet_label = %NoResponseYetLabel
+@onready var response_tab = %ResponseTab
 
 var _details: NDT_RequestDetails
 
@@ -23,6 +27,49 @@ func _update_data() -> void:
 	request_timestamp_label.text = _details.request_timestamp
 	response_timestamp_label.text = _details.response_timestamp
 	request_body_label.text = _get_body_text(_details.request_body)
+	
+	_update_response_ui()
+
+
+func _update_response_ui() -> void:
+	if _details.status_code == -1:
+		# no response yet
+		response_tab.hide()
+		no_response_yet_label.show()
+		return
+	
+	response_tab.show()
+	no_response_yet_label.hide()
+	
+	var content_type = _details.get_response_header_value("Content-type")
+	
+	if content_type.begins_with("image/"):
+		response_texture_rect.texture = _load_image_from_response(content_type)
+	else:
+		response_body_label.text = _get_body_text(_details.response_body)
+
+
+func _load_image_from_response(img_type: String) -> Texture2D:
+	var buffer = _details.response_body
+	
+	var image = Image.new()
+	
+	if img_type == "image/jpeg":
+		image.load_jpg_from_buffer(buffer)
+	elif img_type == "image/png":
+		image.load_png_from_buffer(buffer)
+	elif img_type == "image/bmp":
+		image.load_bmp_from_buffer(buffer)
+	elif img_type == "image/svg":
+		image.load_svg_from_buffer(buffer)
+	elif img_type == "image/webp":
+		image.load_webp_from_buffer(buffer)
+	else:
+		# Unsupported image type
+		return null
+	
+	var texture = ImageTexture.create_from_image(image)
+	return texture
 
 
 func _get_body_text(body) -> String:
@@ -38,5 +85,9 @@ func _get_body_text(body) -> String:
 		
 		var beautified_json = JSON.stringify(parser.data, "\t")
 		return beautified_json
+	
+	if body is PackedByteArray:
+		var text = body.get_string_from_utf8()
+		return _get_body_text(text)
 	
 	return "<can't parse body>"

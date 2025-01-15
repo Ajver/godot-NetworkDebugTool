@@ -27,3 +27,12 @@ func get_method_as_string() -> String:
 		HTTPClient.Method.METHOD_CONNECT: "CONNECT",
 		HTTPClient.Method.METHOD_PATCH: "PATCH",
 	}[method]
+
+
+func get_response_header_value(header_name: String) -> String:
+	for header in response_headers:
+		if header.to_lower().begins_with(header_name.to_lower()):
+			var value = header.substr(header.find(":") + 1)
+			return value.strip_edges()
+	
+	return ""
