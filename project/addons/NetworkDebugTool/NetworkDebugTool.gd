@@ -20,10 +20,13 @@ func clear_requests_list() -> void:
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ndt_show"):
-		_pop_window()
+		pop_window()
 
 
-func _pop_window() -> void:
+func pop_window() -> void:
+	if is_instance_valid(_gui):
+		_gui.queue_free()
+	
 	_gui = _NDT_GUI_SCENE.instantiate()
 	add_child(_gui)
 	_gui.set_requests(_requests_list)
