@@ -37,3 +37,30 @@ func get_response_header_value(header_name: String) -> String:
 			return value.strip_edges()
 	
 	return ""
+
+
+func is_image_response() -> bool:
+	var content_type = get_response_header_value("Content-type")
+	var is_image = content_type.begins_with("image/")
+	return is_image
+
+
+func load_image_from_response() -> Image:
+	var img_type = get_response_header_value("Content-type")
+	var image = Image.new()
+	
+	if img_type == "image/jpeg":
+		image.load_jpg_from_buffer(response_body)
+	elif img_type == "image/png":
+		image.load_png_from_buffer(response_body)
+	elif img_type == "image/bmp":
+		image.load_bmp_from_buffer(response_body)
+	elif img_type.begins_with("image/svg"):
+		image.load_svg_from_buffer(response_body)
+	elif img_type == "image/webp":
+		image.load_webp_from_buffer(response_body)
+	else:
+		# Unsupported image type
+		return null
+	
+	return image

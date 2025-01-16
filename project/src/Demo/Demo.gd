@@ -3,6 +3,8 @@ extends Node
 
 func _ready() -> void:
 	print("Demo")
+
+	_get_req("https://filesamples.com/samples/code/json/sample1.json")
 	
 	await get_tree().create_timer(0.7).timeout
 	_make_request()

@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://wqn0jvn1bieo"]
+
+[ext_resource type="Texture2D" uid="uid://crvy6ba5l4cr4" path="res://addons/NetworkDebugTool/icons/copy.png" id="1_e2sxa"]
+[ext_resource type="Script" path="res://addons/NetworkDebugTool/NDT_GUI/CopyBtn/CopyBtn.gd" id="2_8xfgj"]
+
+[node name="CopyBtn" type="TextureButton"]
+modulate = Color(0.866667, 0.866667, 0.866667, 1)
+custom_minimum_size = Vector2(16, 0)
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("1_e2sxa")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("2_8xfgj")
+normal_color = Color(0.866667, 0.866667, 0.866667, 1)
+hover_color = Color(1, 1, 1, 1)

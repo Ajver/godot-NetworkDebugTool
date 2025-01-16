@@ -1,5 +1,7 @@
 extends AbstractRequestDetailsPreview
 
+@export var CopyAbleLabelScene: PackedScene
+
 @onready var url_label = %UrlLabel
 @onready var method_label = %MethodLabel
 @onready var status_label = %StatusLabel
@@ -7,13 +9,35 @@ extends AbstractRequestDetailsPreview
 @onready var response_timestamp_label = %ResponseTimestampLabel
 @onready var request_headers_container = %RequestHeadersContainer
 @onready var response_headers_container = %ResponseHeadersContainer
+
 @onready var request_body_label = %RequestBodyLabel
+@onready var copy_request_btn = %CopyRequestBtn
+
 @onready var response_body_label = %ResponseBodyLabel
+@onready var copy_response_btn = %CopyResponseBtn
 @onready var response_texture_rect = %ResponseTextureRect
 @onready var no_response_yet_label = %NoResponseYetLabel
 @onready var response_tab = %ResponseTab
 
 var _details: NDT_RequestDetails
+
+
+func _ready() -> void:
+	copy_request_btn.pressed.connect(_copy_request)
+	copy_response_btn.pressed.connect(_copy_response)
+
+
+func _copy_request() -> void:
+	DisplayServer.clipboard_set(_details.request_body)
+
+
+func _copy_response() -> void:
+	if _details.is_image_response():
+		# can't copy image to clipboard
+		return
+	
+	var resp_text = _details.response_body.get_string_from_utf8()
+	DisplayServer.clipboard_set(resp_text)
 
 
 func preview_details(details: NDT_RequestDetails) -> void:
@@ -41,9 +65,10 @@ func _fill_headers_container(container: Control, headers: PackedStringArray) -> 
 		c.queue_free()
 	
 	for header in headers:
-		var header_label = Label.new()
+		var header_label = CopyAbleLabelScene.instantiate()
 		header_label.text = header
 		container.add_child(header_label)
+
 
 func _update_response_ui() -> void:
 	if _details.status_code == -1:
@@ -55,31 +80,17 @@ func _update_response_ui() -> void:
 	response_tab.show()
 	no_response_yet_label.hide()
 	
-	var content_type = _details.get_response_header_value("Content-type")
-	
-	if content_type.begins_with("image/"):
-		response_texture_rect.texture = _load_image_from_response(content_type)
+	if _details.is_image_response():
+		response_texture_rect.texture = _load_image_from_response()
 	else:
 		response_body_label.text = _get_body_text(_details.response_body)
 
 
-func _load_image_from_response(img_type: String) -> Texture2D:
-	var buffer = _details.response_body
+func _load_image_from_response() -> Texture2D:
+	var image = _details.load_image_from_response()
 	
-	var image = Image.new()
-	
-	if img_type == "image/jpeg":
-		image.load_jpg_from_buffer(buffer)
-	elif img_type == "image/png":
-		image.load_png_from_buffer(buffer)
-	elif img_type == "image/bmp":
-		image.load_bmp_from_buffer(buffer)
-	elif img_type.begins_with("image/svg"):
-		image.load_svg_from_buffer(buffer)
-	elif img_type == "image/webp":
-		image.load_webp_from_buffer(buffer)
-	else:
-		# Unsupported image type
+	if image == null:
+		# not an image
 		return null
 	
 	var texture = ImageTexture.create_from_image(image)
