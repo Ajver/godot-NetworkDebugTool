@@ -33,8 +33,11 @@ func _update_data() -> void:
 		status_label.text = "pending"
 	else:
 		status_label.text = str(_details.status_code)
-	
 
 
 func _on_pressed() -> void:
 	pressed.emit(_details)
+
+
+func get_details() -> NDT_RequestDetails:
+	return _details
