@@ -37,7 +37,10 @@ func _filter(_v=null) -> void:
 
 
 func _clear_logs() -> void:
-	print("Clearing logs...")
+	NetworkDebugTool.clear_requests_list()
+	
+	for row in requests_list_container.get_children():
+		row.queue_free()
 
 
 func set_requests(req_list: Array[NDT_RequestDetails]) -> void:

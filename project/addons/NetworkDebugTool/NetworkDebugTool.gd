@@ -14,6 +14,10 @@ func append_request_details(details: NDT_RequestDetails) -> void:
 		_gui.new_request(details)
 
 
+func clear_requests_list() -> void:
+	_requests_list.clear()
+
+
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ndt_show"):
 		_pop_window()
