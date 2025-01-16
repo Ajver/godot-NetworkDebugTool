@@ -33,6 +33,7 @@ theme_override_constants/margin_bottom = 2
 
 [node name="RequestRow" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
+theme_override_constants/separation = 5
 
 [node name="IconTextureRect" type="TextureRect" parent="MarginContainer/RequestRow"]
 unique_name_in_owner = true
@@ -43,12 +44,14 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Request Name"
+clip_text = true
+text_overrun_behavior = 3
 
 [node name="StatusLabel" type="Label" parent="MarginContainer/RequestRow"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 text = "200"
+horizontal_alignment = 2
 
 [node name="Button" type="Button" parent="."]
 unique_name_in_owner = true

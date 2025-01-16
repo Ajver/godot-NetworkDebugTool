@@ -7,6 +7,7 @@ signal data_updated
 var url: String
 var method: HTTPClient.Method
 var request_body: String
+var request_headers: PackedStringArray
 var status_code: int = -1
 var request_timestamp: String
 var response_timestamp: String = "-"

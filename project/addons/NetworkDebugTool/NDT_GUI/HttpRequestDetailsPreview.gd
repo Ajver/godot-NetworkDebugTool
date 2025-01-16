@@ -5,6 +5,8 @@ extends AbstractRequestDetailsPreview
 @onready var status_label = %StatusLabel
 @onready var request_timestamp_label = %RequestTimestampLabel
 @onready var response_timestamp_label = %ResponseTimestampLabel
+@onready var request_headers_container = %RequestHeadersContainer
+@onready var response_headers_container = %ResponseHeadersContainer
 @onready var request_body_label = %RequestBodyLabel
 @onready var response_body_label = %ResponseBodyLabel
 @onready var response_texture_rect = %ResponseTextureRect
@@ -28,8 +30,20 @@ func _update_data() -> void:
 	response_timestamp_label.text = _details.response_timestamp
 	request_body_label.text = _get_body_text(_details.request_body)
 	
+	_fill_headers_container(response_headers_container, _details.response_headers)
+	_fill_headers_container(request_headers_container, _details.request_headers)
+	
 	_update_response_ui()
 
+
+func _fill_headers_container(container: Control, headers: PackedStringArray) -> void:
+	for c in container.get_children():
+		c.queue_free()
+	
+	for header in headers:
+		var header_label = Label.new()
+		header_label.text = header
+		container.add_child(header_label)
 
 func _update_response_ui() -> void:
 	if _details.status_code == -1:
@@ -60,7 +74,7 @@ func _load_image_from_response(img_type: String) -> Texture2D:
 		image.load_png_from_buffer(buffer)
 	elif img_type == "image/bmp":
 		image.load_bmp_from_buffer(buffer)
-	elif img_type == "image/svg":
+	elif img_type.begins_with("image/svg"):
 		image.load_svg_from_buffer(buffer)
 	elif img_type == "image/webp":
 		image.load_webp_from_buffer(buffer)
