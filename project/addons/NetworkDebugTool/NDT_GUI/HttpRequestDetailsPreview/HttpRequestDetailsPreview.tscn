@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bkuvij70opyof"]
+[gd_scene load_steps=3 format=3 uid="uid://bkuvij70opyof"]
 
 [ext_resource type="Script" path="res://addons/NetworkDebugTool/NDT_GUI/HttpRequestDetailsPreview.gd" id="1_08mk3"]
+[ext_resource type="PackedScene" uid="uid://jb85xokfqc2c" path="res://addons/NetworkDebugTool/NDT_GUI/HttpRequestDetailsPreview/CopyAbleLabel/CopyAbleLabel.tscn" id="2_n7e1v"]
 
 [node name="HttpRequestDetailsPreview" type="TabContainer"]
 custom_minimum_size = Vector2(100, 100)
@@ -32,46 +33,41 @@ custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
 text = "Request URL:"
 
-[node name="UrlLabel" type="Label" parent="Headers/ScrollContainer/VBoxContainer/Headers"]
+[node name="UrlLabel" parent="Headers/ScrollContainer/VBoxContainer/Headers" instance=ExtResource("2_n7e1v")]
 unique_name_in_owner = true
 layout_mode = 2
-text = "request url"
 
 [node name="Label2" type="Label" parent="Headers/ScrollContainer/VBoxContainer/Headers"]
 layout_mode = 2
 text = "Method:"
 
-[node name="MethodLabel" type="Label" parent="Headers/ScrollContainer/VBoxContainer/Headers"]
+[node name="MethodLabel" parent="Headers/ScrollContainer/VBoxContainer/Headers" instance=ExtResource("2_n7e1v")]
 unique_name_in_owner = true
 layout_mode = 2
-text = "POST/GET"
 
 [node name="Label4" type="Label" parent="Headers/ScrollContainer/VBoxContainer/Headers"]
 layout_mode = 2
 text = "Status code:"
 
-[node name="StatusLabel" type="Label" parent="Headers/ScrollContainer/VBoxContainer/Headers"]
+[node name="StatusLabel" parent="Headers/ScrollContainer/VBoxContainer/Headers" instance=ExtResource("2_n7e1v")]
 unique_name_in_owner = true
 layout_mode = 2
-text = "200"
 
 [node name="Label3" type="Label" parent="Headers/ScrollContainer/VBoxContainer/Headers"]
 layout_mode = 2
 text = "Request time:"
 
-[node name="RequestTimestampLabel" type="Label" parent="Headers/ScrollContainer/VBoxContainer/Headers"]
+[node name="RequestTimestampLabel" parent="Headers/ScrollContainer/VBoxContainer/Headers" instance=ExtResource("2_n7e1v")]
 unique_name_in_owner = true
 layout_mode = 2
-text = "1969-07-20 20:17:13"
 
 [node name="Label5" type="Label" parent="Headers/ScrollContainer/VBoxContainer/Headers"]
 layout_mode = 2
 text = "Response time:"
 
-[node name="ResponseTimestampLabel" type="Label" parent="Headers/ScrollContainer/VBoxContainer/Headers"]
+[node name="ResponseTimestampLabel" parent="Headers/ScrollContainer/VBoxContainer/Headers" instance=ExtResource("2_n7e1v")]
 unique_name_in_owner = true
 layout_mode = 2
-text = "1969-07-20 20:17:13"
 
 [node name="HSeparator" type="HSeparator" parent="Headers/ScrollContainer/VBoxContainer"]
 layout_mode = 2
