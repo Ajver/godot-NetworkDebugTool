@@ -11,6 +11,8 @@ func _ready() -> void:
 	
 	_download_some_images()
 	
+	_demo_request_raw()
+	
 	await get_tree().create_timer(5.7).timeout
 	_make_request()
 
@@ -19,6 +21,12 @@ func _make_request() -> void:
 	var req: NDT_HttpRequest = NDT_HttpRequest.new()
 	add_child(req)
 	req.request("https://genrandom.com/api/cat")
+
+
+func _demo_request_raw() -> void:
+	var req: NDT_HttpRequest = NDT_HttpRequest.new()
+	add_child(req)
+	req.request_raw("https://genrandom.com/api/cat", [], 2, PackedByteArray([13, 32]))
 
 
 func _download_some_images() -> void:

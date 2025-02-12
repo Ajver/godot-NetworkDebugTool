@@ -27,6 +27,22 @@ func request(url: String, custom_headers: PackedStringArray = PackedStringArray(
 	return error
 
 
+func request_raw(url: String, custom_headers: PackedStringArray = PackedStringArray(), method: HTTPClient.Method = 0, request_data_raw: PackedByteArray = PackedByteArray()) -> Error:
+	var error = _request.request_raw(url, custom_headers, method, request_data_raw)
+	
+	_details = NDT_RequestDetails.new()
+	_details.request_timestamp = Time.get_datetime_string_from_system(false, true)
+	_details.request_body_raw = request_data_raw
+	_details.request_headers = custom_headers
+	_details.url = url
+	_details.method = method
+	_details.http_req_error = error
+	
+	NetworkDebugTool.append_request_details(_details)
+	
+	return error
+
+
 func _on_request_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray) -> void:
 	_details.response_timestamp = Time.get_datetime_string_from_system(false, true)
 	_details.status_code = response_code
