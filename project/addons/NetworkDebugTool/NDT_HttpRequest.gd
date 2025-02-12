@@ -1,6 +1,35 @@
 extends Node
 class_name NDT_HttpRequest
 
+var accept_gzip: bool = true:
+	set(value): 
+		accept_gzip = value
+		_request.accept_gzip = value
+var body_size_limit: int = -1:
+	set(value): 
+		body_size_limit = value
+		_request.body_size_limit = value
+var download_chunk_size: int = 65536:
+	set(value):
+		download_chunk_size = value
+		_request.download_chunk_size = value
+var download_file: String = "":
+	set(value):
+		download_file = value
+		_request.download_file = value
+var max_redirects: int = 8:
+	set(value):
+		max_redirects = value
+		_request.max_redirects = value
+var timeout: float = 0.0:
+	set(value):
+		timeout = value
+		_request.timeout = value
+var use_threads: bool = false:
+	set(value):
+		use_threads = value
+		_request.use_threads = value
+
 var _request: HTTPRequest
 var _details: NDT_RequestDetails
 
@@ -49,3 +78,55 @@ func _on_request_completed(result: int, response_code: int, headers: PackedStrin
 	_details.response_headers = headers
 	_details.response_body = body
 	_details.data_updated.emit()
+
+
+func is_accepting_gzip() -> bool:
+	return accept_gzip
+
+
+func get_body_size_limit() -> int:
+	return body_size_limit
+
+
+func get_download_chunk_size() -> int:
+	return download_chunk_size
+
+
+func get_download_file() -> String:
+	return download_file
+
+
+func get_timeout() -> float:
+	return timeout
+
+
+func is_using_threads() -> bool:
+	return use_threads
+
+
+func cancel_request() -> void:
+	_request.cancel_request()
+
+
+func get_body_size() -> int:
+	return _request.get_body_size()
+
+
+func get_downloaded_bytes() -> int:
+	return _request.get_downloaded_bytes()
+
+
+func get_http_client_status() -> HTTPClient.Status:
+	return _request.get_http_client_status()
+
+
+func set_http_proxy(host: String, port: int) -> void:
+	_request.set_http_proxy(host, port)
+
+
+func set_https_proxy(host: String, port: int) -> void:
+	_request.set_https_proxy(host, port)
+
+
+func set_tls_options(client_options: TLSOptions) -> void:
+	_request.set_tls_options(client_options)

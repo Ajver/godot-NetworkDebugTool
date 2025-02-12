@@ -25,6 +25,7 @@ func _make_request() -> void:
 
 func _demo_request_raw() -> void:
 	var req: NDT_HttpRequest = NDT_HttpRequest.new()
+	
 	add_child(req)
 	req.request_raw("https://genrandom.com/api/cat", [], 2, PackedByteArray([13, 32]))
 
